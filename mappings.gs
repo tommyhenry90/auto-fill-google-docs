@@ -99,14 +99,14 @@ var costMappings = {
 var paymentTermsMappings = {
   sheet: "Firm Inputs",
   data: {
-    "<first_percentage>": 'H83',
-    "<second_percentage>": 'H84',
-    "<third_percentage>": 'H85',
-    "<total_percentage>": 'H89',
-    "<first_dollars>": 'I83',
-    "<second_dollars>": 'I84',
-    "<third_dollars>": 'I85',
-    "<total_dollars>": 'G89'
+    "<first_percentage>": 'H84',
+    "<second_percentage>": 'H85',
+    "<third_percentage>": 'H86',
+    "<total_percentage>": 'H90',
+    "<first_dollars>": 'I84',
+    "<second_dollars>": 'I85',
+    "<third_dollars>": 'I86',
+    "<total_dollars>": 'G90'
   }
 }
 
@@ -131,6 +131,5 @@ var projectVariables = [
   "num_wingman",
   "company_name",
   "contact_name",
-  "contact_email",
-  "sales_person"
+  "contact_email"
 ];
