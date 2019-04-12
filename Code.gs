@@ -45,6 +45,22 @@ function updateInclusions(ss, body, map) {
   body.replaceText("<exclusions>", exclusionsText.slice(0,-1));
 }
 
+function getNameFromEmail(email) {
+  var nameParts = email.split("@");
+  var name = nameParts.length==2 ? nameParts[0] : null;
+  
+  var firstLast = name.split(".");
+  var fullName = "";
+  
+  for (i in firstLast) {
+    var string = firstLast[i].toString();
+    string = string.charAt(0).toUpperCase() + string.slice(1);
+    fullName += string;
+    fullName += " ";
+  }
+  return fullName.trim();
+}
+
 
 function AutofillDocFromTemplate(){
   var TEMPLATE_ID = "1hnz7-dV7QPthmPKwTBJKVq657zJRtjGwWcq99Gdtezk";
@@ -57,6 +73,11 @@ function AutofillDocFromTemplate(){
   var docId = DriveApp.getFileById(TEMPLATE_ID).makeCopy(FILE_NAME, folder).getId();
   var doc = DocumentApp.openById(docId);
   var body = doc.getActiveSection();
+  
+  var user = Session.getActiveUser();
+  var userEmail = user.getEmail();
+  var userName = getNameFromEmail(userEmail);
+  
   
   for (i in projectVariables) {
     setDocVariables(ss, doc, projectVariables[i]);
@@ -92,8 +113,8 @@ function AutofillDocFromTemplate(){
   var document_name = project_number + " - " + company_name + " - " + project_name + " - " + power_dc_total;
   body.replaceText("<document_name>", document_name);
   body.replaceText("<date_indicative_offer>", getLongDate());
-  body.replaceText("<sales_person_email>", "rob.ludwick@5b.com.au");
-  body.replaceText("<sales_person>", "Rob Ludwick");
+  body.replaceText("<sales_person_email>", userEmail);
+  body.replaceText("<sales_person>", userName);
   
   
   doc.saveAndClose()
